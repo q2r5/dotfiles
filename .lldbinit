@@ -1,0 +1,3 @@
+command alias fdn expr @import Foundation
+command alias uik expr @import UIKit
+command regex fw 's/(.+)/expr -l objc++ -O -- @import %1/'

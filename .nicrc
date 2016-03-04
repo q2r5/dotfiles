@@ -1,0 +1,3 @@
+package_prefix = "ws.hbang"
+username = "HASHBANG Productions <support@hbang.ws>"
+skip_package_name = "1"

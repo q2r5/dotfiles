@@ -1,0 +1,81 @@
+#!/usr/bin/env zsh
+
+# defaults
+alias ls='ls -Fblapht --color'
+alias grep='grep --color -in --exclude-dir={.bzr,.cvs,.git,.hg,.svn}'
+alias wget='wget --content-disposition'
+alias ssh='nocorrect ssh'
+alias dpkg-deb='dpkg-deb -Zlzma'
+alias strings='strings -a'
+
+# kinda-sorta functions
+alias filesize='stat -c %s'
+alias finder='open -R'
+alias reload='. ~/.zshrc'
+
+# shorter names
+alias vboxmanage=VBoxManage
+alias vbox=VBoxManage
+alias plistbuddy=/usr/libexec/PlistBuddy
+alias plbuddy=/usr/libexec/PlistBuddy
+alias xcselect=xcode-select
+alias xcsel=xcode-select
+alias hop='hopper -e'
+alias io=optim
+
+# cross-platform normalisation
+if has afplay; then
+	alias play=afplay
+elif has aplay; then
+	alias play=aplay
+fi
+
+alias pbcopy=clipcopy
+alias pbpaste=clippaste
+
+# if we have hub, alias git to it
+if has hub; then
+	alias git=hub
+	compdef hub=git
+fi
+
+# theos
+alias nic='$THEOS/bin/nic.pl'
+alias logify='$THEOS/bin/logify.pl'
+alias logos='$THEOS/bin/logos.pl'
+alias nicify='$THEOS/bin/nicify.pl'
+alias denicify='$THEOS/bin/denicify.pl'
+
+# apps
+alias tview='open /Applications/TeamViewer.app'
+alias pxm='open -b com.pixelmatorteam.pixelmator'
+alias psd='open -b com.adobe.Photoshop'
+alias xcode='open -b com.apple.dt.xcode'
+alias cr='open -b com.google.Chrome'
+alias vlc='open -b org.videolan.vlc'
+alias optim='open -b net.pornel.ImageOptim'
+alias alpha='open -b net.pornel.ImageAlpha'
+
+# typos
+alias kilall=killall
+alias kilalll=killall
+alias killlal=killall
+alias killal=killall
+alias killalll=killall
+alias sl=ls
+alias ks=ls
+alias lks=ls
+alias kls=ls
+alias l=ls
+alias s=ls
+alias dc=cd
+alias c=cd
+alias d=cd
+alias anno=nano
+alias lss=less
+alias les=less
+alias got=git
+alias gti=git
+alias gi=git
+alias gt=git
+alias g=git

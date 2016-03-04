@@ -1,0 +1,116 @@
+# mostly stolen from paul irish’s dotfiles
+
+[core]
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+
+	# insanely beautiful diffs
+	pager = diff-highlight | diff-so-fancy | less -r
+
+# use separate file for username / github token / etc
+[include]
+  path = ~/.gitconfig.private
+
+[init]
+	templatedir = ~/.gittemplate
+
+# rewrites of repo paths
+[url "git@github.com:"]
+	insteadOf = "gh:"
+	insteadOf = "git://github.com"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+	pushInsteadOf = "https://github.com/"
+
+# correct typos
+[help]
+	autocorrect = 1
+
+# dad had one of these back in the day
+[pager]
+	diff = diff-so-fancy | less --tabs=1,5 -RFX
+	show = diff-so-fancy | less --tabs=1,5 -RFX
+
+# push easily. http://stackoverflow.com/a/23918418/89484
+[push]
+	default = current
+	followTags = true
+
+# rebase! http://stackoverflow.com/q/804115
+[pull]
+	rebase = true
+
+# git mergetool
+[merge]
+	tool = opendiff
+
+# so much color
+[color]
+	ui = always
+
+[color "diff"]
+	meta = yellow bold
+	commit = yellow
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[alias]
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
+
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+
+	# this is pretty useful
+	diff = diff --patch-with-stat
+
+	# literally my life
+	og = log
+	lgo = log
+	cmomit = commit
+	comimt = commit
+	comit = commit
+	ocmmit = commit
+	ocmit = commit
+	ommit = commit
+	commt = commit
+	comit = commit
+	commi = commit
+	cmit = commit
+	omit = commit
+	cmt = commit
+	statsu = status
+	statu = status
+	sttus = status
+	stats = status
+	stts = status
+	st = status
+
+# filtery stuff. i don’t have a clue what any of this does
+[filter "media"]
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true

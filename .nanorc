@@ -1,0 +1,11 @@
+set brackets ""')>]}"
+set const
+set historylog
+set morespace
+unset nowrap
+set regexp
+set smarthome
+set suspend
+set tabsize 2
+
+include "/usr/local/share/nano/*.nanorc"

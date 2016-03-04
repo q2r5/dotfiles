@@ -1,0 +1,10 @@
+# os x shit
+.DS_Store
+._*
+
+# theos shit
+debs/
+.theos/
+
+# specific to this repo
+*.private
