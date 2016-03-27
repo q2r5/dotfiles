@@ -1,0 +1,19 @@
+#!/bin/bash
+# post to rescuetime
+
+# api key must be in .rescuetime.private. if not, exit silently
+if [[ ! -f ~/.dotfiles/.rescuetime.private ]]; then
+	exit 1
+fi
+
+source ~/.dotfiles/.rescuetime.private
+
+curl \
+	-F "key=$RESCUETIME_API_KEY" \
+	-F "highlight_date=$(date +"%Y-%m-%d")" \
+	-F "description=$(git log -1 HEAD --pretty=format:%s)" \
+	-F "source=code commit" \
+	https://www.rescuetime.com/anapi/highlights_post
+
+# the response doesn’t have a newline. echo nothing so a newline gets printed
+echo
