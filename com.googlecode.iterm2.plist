@@ -482,17 +482,19 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>2368 135 754 416 1440 -96 1920 1080 </string>
+	<string>2550 163 754 416 1440 -96 1920 1080 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>265 1492 606 456 -254 900 1920 1057 </string>
+	<string>269 415 606 456 0 0 1440 877 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>506 1596 400 129 -254 900 1920 1057 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>2050 247 700 622 1440 -96 1920 1080 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 43 996 834 0 0 1440 877 </string>
+	<key>NSWindow Frame com.apple.typography_panel_FiraCode-Regular</key>
+	<string>2000 525 260 176 1440 -96 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>53 1159 794 606 -254 900 1920 1057 </string>
+	<string>1747 163 794 606 1440 -96 1920 1057 </string>
 	<key>NeverWarnAboutShortLivedSessions_6EE2510D-F7CA-4F05-AEE5-F7F9A420683A</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_6EE2510D-F7CA-4F05-AEE5-F7F9A420683A_selection</key>
@@ -1491,6 +1493,8 @@
 			<array/>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
+			<key>Thin Strokes</key>
+			<integer>2</integer>
 			<key>Transparency</key>
 			<real>0.09400656434911242</real>
 			<key>Triggers</key>
