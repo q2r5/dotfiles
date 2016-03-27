@@ -8,6 +8,7 @@ alias ssh='nocorrect ssh'
 alias dpkg-deb='dpkg-deb -Zlzma'
 alias strings='strings -a'
 alias youtube-dl='youtube-dl --merge-output-format mp4 --audio-format m4a'
+alias pv='pv -W'
 
 # kinda-sorta functions
 alias filesize='stat -c %s'
