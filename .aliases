@@ -7,6 +7,7 @@ alias wget='wget --content-disposition'
 alias ssh='nocorrect ssh'
 alias dpkg-deb='dpkg-deb -Zlzma'
 alias strings='strings -a'
+alias youtube-dl='youtube-dl --merge-output-format mp4 --audio-format m4a'
 
 # kinda-sorta functions
 alias filesize='stat -c %s'
@@ -22,6 +23,7 @@ alias xcselect=xcode-select
 alias xcsel=xcode-select
 alias hop='hopper -e'
 alias io=optim
+alias ytdl=youtube-dl
 
 # cross-platform normalisation
 if has afplay; then
