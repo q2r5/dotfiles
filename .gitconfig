@@ -1,15 +1,15 @@
 # mostly stolen from paul irish’s dotfiles
 
 [core]
-	excludesfile = ~/.gitignore
-	attributesfile = ~/.gitattributes
+	excludesfile = ~/.dotfiles/.gitignore
+	attributesfile = ~/.dotfiles/.gitattributes
 
 	# insanely beautiful diffs
 	pager = diff-so-fancy | less -R -x2
 
 # use separate file for username / github token / etc
 [include]
-  path = ~/.gitconfig.private
+  path = ~/.dotfiles/.gitconfig.private
 
 [init]
 	templatedir = ~/.gittemplate
