@@ -8,7 +8,7 @@
 # iTerm2 –> Install Shell Integration
 
 # path yo
-[[ -z "$THEOS" ]] && export THEOS=/opt/theos
+[[ -z "$THEOS" ]] && export THEOS=~/theos
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/opt/ruby/bin:/usr/bin:/bin:/usr/sbin:/sbin:$THEOS/bin:$HOME/.rvm/bin
 export MANPATH=/usr/local/share/man:$MANPATH
