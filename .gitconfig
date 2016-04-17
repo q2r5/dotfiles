@@ -26,6 +26,10 @@
 [help]
 	autocorrect = 1
 
+# GPG sign commits
+[commit]
+	gpgsign = true
+
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]
 	default = current
