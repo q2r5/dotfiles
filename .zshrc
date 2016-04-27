@@ -50,7 +50,7 @@ export PROJ=~/Documents/Projects
 export THEOS_DEVICE_IP=local
 export SDKVERSION= SIMVERSION=
 
-export EDITOR='subl -w'
+export EDITOR='atom -w'
 
 # if this is an ssh session, use nano instead
 [[ ! -z "$SSH_CLIENT" ]] && export EDITOR=nano

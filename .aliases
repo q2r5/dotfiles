@@ -58,6 +58,7 @@ alias cr='open -b com.google.Chrome'
 alias vlc='open -b org.videolan.vlc'
 alias optim='open -b net.pornel.ImageOptim'
 alias alpha='open -b net.pornel.ImageAlpha'
+alias subl=atom
 
 # typos
 alias kilall=killall

@@ -123,7 +123,7 @@ done
 # 5: install casks
 status "Installing casks"
 # essentials
-run brew cask install flux google-chrome-dev iterm2-beta sublime-text3 the-unarchiver vlc
+run brew cask install atom-beta flux google-chrome-dev iterm2-beta the-unarchiver vlc
 # personal
 # TODO: should be optional
 run brew cask install backblaze dropbox gpgtools google-drive
