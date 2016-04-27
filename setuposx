@@ -129,7 +129,10 @@ run brew cask install atom-beta flux google-chrome-dev iterm2-beta the-unarchive
 run brew cask install backblaze dropbox gpgtools google-drive
 # nice to haves
 # TODO: should be optional
-run brew cask install audacity colorpicker-skalacolor disk-inventory-x handbrake hopper-disassembler ifunbox imagealpha imageoptim karabiner keepassx lastpass licecap linein mumble rescuetime screenhero skype spotify spotify-notifications teamspeak-client teamviewer virtualbox virtualbox-extension-pack vmware-fusion xscreensaver
+run brew cask install colorpicker-skalacolor disk-inventory-x handbrake hopper-disassembler ifunbox imagealpha imageoptim karabiner keepassx lastpass licecap linein microsoft-office mumble rescuetime screenhero skype spotify spotify-notifications teamspeak-client teamviewer virtualbox virtualbox-extension-pack vmware-fusion xscreensaver
+# audio
+# TODO: maybe should be optional?
+run brew cask install audacity au-lab soundflower soundflowerbed
 # quick look
 run brew cask install betterzipql emin-webpquicklook epubquicklook hetimazipql inloop-qlplayground ipaql qlcolorcode qlplayground qlprettypatch qlrest scriptql stringsfile ttscoff-mmd-quicklook webpquicklook
 # fonts
