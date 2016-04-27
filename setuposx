@@ -323,6 +323,14 @@ run defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool YE
 run defaults write com.apple.universalaccess closeViewSmoothImages -bool NO
 # follow keyboard focus while zoomed
 run defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool YES
+# set highlight command line flags for QLColorCode
+run defaults write org.n8gray.QLColorCode extraHLFlags '-lV -t2'
+# use fira code for QLColorCode
+run defaults write org.n8gray.QLColorCode font 'Fira Code'
+# set color scheme for QLColorCode
+run defaults write org.n8gray.QLColorCode hlTheme blacknblue
+# for some reason it doesn’t see highlight despite saying it checks /usr/local/bin…
+run defaults write org.n8gray.QLColorCode pathHL $brewdir/bin/highlight
 # set iterm2 custom prefs dir
 run defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool YES
 run defaults write com.googlecode.iterm2 PrefsCustomFolder -string ~/.dotfiles
