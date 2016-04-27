@@ -111,7 +111,7 @@ run brew link --force bzip2 perl sqlite3
 
 # TODO: class-dump is broken
 
-for i in $brewdir/opt/{coreutils,findutils,gnu-sed,gnu-tar,grep}/bin/g*; do
+for i in $brewdir/opt/{coreutils,findutils,gnu-sed,gnu-tar,gnu-which,grep,make}/bin/g*; do
 	name=$(basename $i)
 	newname=$brewdir/bin/${name:1}
 
