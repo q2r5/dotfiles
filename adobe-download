@@ -1,0 +1,29 @@
+#!/bin/bash
+# inspired by https://gist.github.com/geoff-codes/9615416
+
+# curl the trial download url in order to set the cookie needed to download the
+# files we actually want
+cookie="$(curl -Lsc - "http://www.adobe.com/cfusion/tdrc/index.cfm?product=acrobat_pro" -o /dev/null | grep MM_ | sed 's|.*LS.||')"
+
+# create the directory to store the downloads in
+mkdir -p ~/Downloads/Adobe
+cd ~/Downloads/Adobe
+
+# loop over the desired downloads
+for path in \
+	/PHSP/16/osx10/Photoshop_16_LS20.dmg \
+	/ILST/19/osx10-64/Illustrator_19_LS20.dmg \
+	/PPRO/9/osx10-64/PremierePro_9_LS20.dmg \
+	/AEFT/13_5/osx10-64/AfterEffects_13_5_LS20.dmg \
+	/AUDT/8/osx10-64/Audition_8_LS20.dmg \
+	/AME/9/osx10-64/AdobeMediaEncoder_9_LS20.dmg; do
+	file="$(basename "$path")"
+	echo "$file"
+
+	curl -C - -#LOR \
+		--cookie MM_TRIALS="$cookie" \
+		https://trials3.adobe.com/AdobeProducts"$path" || \
+		exit 1
+
+	open "$file"
+done
