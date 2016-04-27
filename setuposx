@@ -426,6 +426,7 @@ if [[ $answer != n ]]; then
 	add_dock_item /Applications/iTunes.app
 	add_dock_item ~/Applications/Spotify.app
 	add_dock_item /Applications/Screen\ Sharing.app
+	add_dock_item ~/Applications/Microsoft\ Remote\ Desktop\ Beta.app
 	add_dock_item /Applications/TeamViewer.app
 	add_dock_item ~/Applications/Skype.app
 fi
