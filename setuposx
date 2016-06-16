@@ -382,6 +382,10 @@ if [[ ! -d /Applications/Screen\ Sharing.app ]]; then
 	ln -s /System/Library/CoreServices/Applications/Screen\ Sharing.app /Applications/Screen\ Sharing.app
 fi
 
+if [[ ! -d /Applications/Atom.app ]]; then
+	ln -s Atom\ Beta.app /Applications/Atom.app
+fi
+
 if [[ ! -h ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User ]]; then
 	if [[ -d ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User ]]; then
 		echo -n "Replace Sublime Text preferences? [Yn] "
