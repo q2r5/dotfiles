@@ -44,6 +44,10 @@
 [merge]
 	tool = opendiff
 
+# clone up to 4 submodules at once
+[submodule]
+	fetchJobs = 4
+
 # so much color
 [color]
 	ui = always
