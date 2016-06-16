@@ -358,18 +358,18 @@ run defaults write io.citruspi.Spotify-Notifications onlycurrentsong -int 1
 # 9: set up apps
 status "Setting up apps"
 
-open_if_exists /opt/homebrew-cask/Caskroom/backblaze/latest/Backblaze\ Installer.app
-open_if_exists ~/Applications/Dropbox.app
-open_if_exists ~/Applications/Flux.app
-open_if_exists ~/Applications/Google\ Drive.app
+open_if_exists $brewdir/Caskroom/backblaze/latest/Backblaze Installer.app
+open_if_exists /Applications/Dropbox.app
+open_if_exists /Applications/Flux.app
+open_if_exists /Applications/Google\ Drive.app
 open_if_exists /Applications/Karabiner.app
-open_if_exists ~/Applications/RescueTime.app
-open_if_exists ~/Applications/Screenhero.app
-open_if_exists ~/Applications/Skype.app
-open_if_exists ~/Applications/Spotify.app
-open_if_exists ~/Applications/Spotify\ Notifications.app
+open_if_exists /Applications/RescueTime.app
+open_if_exists /Applications/Screenhero.app
+open_if_exists /Applications/Skype.app
+open_if_exists /Applications/Spotify.app
+open_if_exists /Applications/Spotify\ Notifications.app
 open_if_exists /Applications/Textual.app
-open_if_exists ~/Applications/The\ Unarchiver.app
+open_if_exists /Applications/The\ Unarchiver.app
 open_if_exists /Applications/Tweetbot.app
 
 add_login_item /Applications/LastPass.app
@@ -408,11 +408,11 @@ read answer
 
 if [[ $answer != n ]]; then
 	dockutil --remove all --no-restart
-	add_dock_item ~/Applications/Google\ Chrome.app
-	add_dock_item ~/Applications/iTerm.app
-	add_dock_item ~/Applications/Sublime\ Text.app
+	add_dock_item /Applications/Google\ Chrome.app
+	add_dock_item /Applications/iTerm.app
+	add_dock_item /Applications/Atom\ Beta.app
 	add_dock_item /Applications/Xcode.app
-	add_dock_item ~/Applications/Hopper\ Disassembler\ v3.app
+	add_dock_item /Applications/Hopper\ Disassembler\ v3.app
 	add_dock_item /Applications/Mail.app
 	add_dock_item /Applications/Messages.app
 	add_dock_item /Applications/Slack.app
@@ -424,10 +424,10 @@ if [[ $answer != n ]]; then
 	add_dock_item /Applications/Adobe\ After\ Effects\ */Adobe After Effects\ *.app
 	add_dock_item /Applications/Final Cut Pro.app
 	add_dock_item /Applications/iTunes.app
-	add_dock_item ~/Applications/Spotify.app
+	add_dock_item /Applications/Spotify.app
 	add_dock_item /Applications/Screen\ Sharing.app
-	add_dock_item ~/Applications/Microsoft\ Remote\ Desktop\ Beta.app
-	add_dock_item ~/Applications/Skype.app
+	add_dock_item /Applications/Microsoft\ Remote\ Desktop\ Beta.app
+	add_dock_item /Applications/Skype.app
 fi
 
 # 11: set default shell
