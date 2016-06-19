@@ -86,28 +86,17 @@ fi
 
 brewdir=$(run brew --prefix)
 
-# 2: install taps
-status "Installing taps"
-run brew tap homebrew/binary
-run brew tap homebrew/command-not-found
-run brew tap homebrew/dev-tools
-run brew tap homebrew/dupes
-run brew tap homebrew/head-only
-run brew tap homebrew/versions
-run brew tap hbang/repo
-run brew tap CharizTeam/chariz
+# 2: install bundle
+status "Installing Homebrew Bundle"
+run brew tap homebrew/bundle
 
-# 3: install cask and taps
-status "Installing Cask and taps"
-run brew tap caskroom/cask
-run brew tap caskroom/versions
-run brew tap caskroom/fonts
+# 3: process brewfile
+status "Installing from Brewfile"
+run brew bundle
 
-# 4: install formulae
-status "Installing formulae"
-run brew install appledoc aria2 autoconf automake bzip2 carthage cmake cmus coreutils curl ddrescue diff-so-fancy dockutil dos2unix dpkg-chariz exiftool ffmpeg findutils flac gettext gifsicle git git-lfs gnu-sed gnu-tar gnu-which gnupg21 gnutls gpg-agent grep highlight htop-osx hub iftop imagemagick irssi jpegoptim jq keybase ldid libimobiledevice make md5sha1sum miniupnpc mobile-shell mongodb nano ncurses ngrok2 nmap node openssh openssl optipng p7zip perl python rsync ruby sloccount socat sqlite ssh-copy-id tmux usbmuxd wakeonlan watch wget xar-mackyle xz youtube-dl zopfli zsh
-run brew install deviceconsole gitstats --HEAD
-run brew link --force bzip2 perl sqlite3
+# 4: force link certain formulae
+status "Force linking formulae"
+run brew link --force bzip2 curl perl sqlite3
 
 # TODO: class-dump is broken
 
@@ -120,27 +109,7 @@ for i in $brewdir/opt/{coreutils,findutils,gnu-sed,gnu-tar,gnu-which,grep,make}/
 	fi
 done
 
-# 5: install casks
-status "Installing casks"
-# essentials
-run brew cask install atom-beta flux google-chrome-dev iterm2-beta the-unarchiver vlc
-# personal
-# TODO: should be optional
-run brew cask install backblaze dropbox gpgtools google-drive
-# nice to haves
-# TODO: should be optional
-run brew cask install colorpicker-skalacolor disk-inventory-x handbrake hopper-disassembler ifunbox imagealpha imageoptim karabiner keepassx lastpass licecap linein microsoft-office mumble rescuetime screenhero skype spotify spotify-notifications teamspeak-client virtualbox virtualbox-extension-pack vmware-fusion xscreensaver
-# audio
-# TODO: maybe should be optional?
-run brew cask install audacity au-lab soundflower soundflowerbed
-# quick look
-run brew cask install betterzipql emin-webpquicklook epubquicklook hetimazipql inloop-qlplayground ipaql qlcolorcode qlplayground qlprettypatch qlrest scriptql stringsfile ttscoff-mmd-quicklook webpquicklook
-# fonts
-run brew cask install font-fira-code font-fira-sans font-fontawesome font-octicons font-open-sans font-open-sans-condensed font-press-start2p font-roboto font-roboto-condensed font-roboto-mono font-roboto-slab font-source-code-pro font-source-sans-pro font-source-serif-pro font-titillium-web font-twitter-color-emoji font-ubuntu
-
-# TODO: audacity downloads on port 81 because it's stupid
-# TODO: qlstephen is broken (crashes finder)
-
+# 5: install font
 status "Downloading Source Code Pro Powerline Awesome Regular (what a mouthful)"
 curl -# https://rawgit.com/gabrielelana/awesome-terminal-fonts/patching-strategy/patched/SourceCodePro+Powerline+Awesome+Regular.ttf -o ~/Library/Fonts/SourceCodePro+Powerline+Awesome+Regular.ttf
 
