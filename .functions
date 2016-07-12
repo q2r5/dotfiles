@@ -1,10 +1,5 @@
 #!/usr/bin/env zsh
 
-# update the prompt every 15 seconds (keep the clock reasonably up to date)
-# via http://stackoverflow.com/a/17915260
-TMOUT=15
-TRAPALRM() { zle reset-prompt }
-
 # handle command not found by displaying packages that contain the command
 command_not_found_handler() {
 	# lazy load the proper handler on the first run
