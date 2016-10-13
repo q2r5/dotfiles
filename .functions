@@ -14,13 +14,6 @@ command_not_found_handler() {
 	fi
 }
 
-# convenience to set THEOS_DEVICE_IP. used to do a lot more than this, but theos
-# has now removed all need for anything special, and it's stuck in muscle memory
-setdevice() {
-	export THEOS_DEVICE_IP=$1
-	echo "$THEOS_DEVICE_IP"
-}
-
 # convenience to switch xcode versions
 xcswitch() {
 	sudo xcode-select -switch "/Applications/Xcode$1.app/Contents/Developer" && \

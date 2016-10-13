@@ -1,6 +1,6 @@
 # Dotfiles
-**aka The Kirb Starter Pack**
+They come from so many places!
 
-They’re files that have dots in them. May be useful to you, but mostly this is for me.
+Please clone with --recursive!
 
-How to use: Clone this repo to somewhere like ~/.dotfiles. Then, symlink files in your home directory to files from this repo.
+`./setuposx` is your friend and don't forget to update `.extra` and possibly `.path` as needed!
