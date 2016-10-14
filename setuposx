@@ -16,15 +16,12 @@ run() {
 brewdir=$(run brew --prefix)
 
 # 2: install bundle
-status "Installing Homebrew Bundle"
 run brew tap homebrew/bundle
 
 # 3: process brewfile
-status "Installing from Brewfile"
 run brew bundle
 
 # 4: force link certain formulae
-status "Force linking formulae"
 run brew link --force bzip2 curl perl sqlite3
 
 # TODO: class-dump is broken
@@ -39,7 +36,6 @@ for i in $brewdir/opt/{coreutils,findutils,gnu-sed,gnu-tar,gnu-which,grep,make}/
 done
 
 # 5: install font
-status "Downloading Source Code Pro Powerline Awesome Regular (what a mouthful)"
 curl -# https://rawgit.com/gabrielelana/awesome-terminal-fonts/patching-strategy/patched/SourceCodePro+Powerline+Awesome+Regular.ttf -o ~/Library/Fonts/SourceCodePro+Powerline+Awesome+Regular.ttf
 
 for i in .gitconfig .htoprc .lldbinit .nanorc .nicrc do

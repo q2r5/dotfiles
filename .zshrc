@@ -10,7 +10,7 @@ if [[ ! -z "$SSH_CLIENT" && -z "$TMUX" ]]; then
 	tmux attach || tmux
 fi
 
-ZSH_THEME=kirb-powerlevel
+ZSH_THEME=q2r5-powerlevel
 DISABLE_AUTO_UPDATE=true
 COMPLETION_WAITING_DOTS=true
 ENABLE_CORRECTION=true
