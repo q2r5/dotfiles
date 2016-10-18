@@ -1,0 +1,48 @@
+#!/bin/sh
+
+function version
+{
+	change=$(curl --no-progress-bar -s -S http://commondatastorage.googleapis.com/chromium-browser-snapshots/Mac/LAST_CHANGE)
+	echo Current Build: ${change}
+}
+
+function download
+{
+	cd ~/Downloads/
+	curl -# http://commondatastorage.googleapis.com/chromium-browser-snapshots/Mac/${change}/chrome-mac.zip > chrome-mac.zip
+	unzip -q chrome-mac.zip
+	cd chrome-mac
+	rm -fr /Applications/Chromium.app
+	mv -f Chromium.app /Applications
+	rm -fr ~/Downloads/chrome-mac
+	rm -fr ~/Downloads/chrome-mac.zip
+}
+
+function update
+{
+	version
+	download
+	exit 1
+}
+
+function usage
+{
+	echo "Downloads the latest build of Chromium from the buildbot waterfall."
+	echo "Usage: LatestChromium [-v|--version] | [-h|--help]"
+}
+
+while [ "$1" != " " ]; do
+	case $1 in
+		-h |--help )
+			usage 
+			exit 1
+			;;
+		-v | --version )
+			version
+			exit 1
+			;;
+		* )
+			update
+			;;
+	esac
+done
