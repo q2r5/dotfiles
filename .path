@@ -1,1 +1,1 @@
-export PATH="$GOPATH/bin:$HOME/bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/Developer/os/grub/build:$GOPATH/bin:$HOME/bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$PATH"

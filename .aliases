@@ -150,3 +150,6 @@ if has hub; then
 	alias git=hub
 	compdef hub=git
 fi
+
+# Restart
+alias restart='sudo shutdown -r now'
