@@ -1,1 +1,1 @@
-export PATH="$HOME/Developer/os/grub/build:$GOPATH/bin:$HOME/bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$HOME/.cargo/bin:$HOME/Developer/dotfiles/bin:$HOME/Developer/depot_tools:$GOPATH/bin:$HOME/bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$PATH"

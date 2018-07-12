@@ -6,20 +6,13 @@ export TERM=xterm-256color
 
 export LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
 
+export TZ=:/etc/localtime
+
+export ZSH=$(dirname $0)/.oh-my-zsh
+
 if [[ ! -z "$SSH_CLIENT" && -z "$TMUX" ]]; then
 	tmux attach || tmux
 fi
-
-ZSH_THEME=q2r5-powerlevel
-DISABLE_AUTO_UPDATE=true
-COMPLETION_WAITING_DOTS=true
-ENABLE_CORRECTION=true
-DEFAULT_USER=whatponi
-plugins=(battery brew gpg-agent osx pod safe-paste ssh-agent tmux)
-
-ZSH=$(dirname $0)/.oh-my-zsh
-
-source $ZSH/oh-my-zsh.sh
 
 has () {
 	type "$1" >/dev/null 2>/dev/null
@@ -43,15 +36,30 @@ if [[ "$SHELL" != "/usr/bin/zsh" ]] && has brew; then
 	HELPDIR=/usr/local/share/zsh/help
 fi
 
+fpath=("$(dirname $0)/.zfunctions" $fpath)
+
+safe_source $ZSH/oh-my-zsh.sh
+
 safe_source $(dirname $0)/.path
 safe_source $(dirname $0)/.aliases
 safe_source $(dirname $0)/.functions
 safe_source $(dirname $0)/.extra
 safe_source ~/.iterm2_shell_integration.zsh
 
-safe_source /usr/local/share/zsh-syntax-highlightinh/zsh-syntax-highlighting.zsh
+case $TERM in
+    xterm*)
+        precmd () {print -Pn "\e]0;%~\a"}
+        ;;
+esac
+
+safe_source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 safe_source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+safe_source $(dirname $(gem which colorls))/tab_complete.sh
 
 if has ruby && has gem; then
     PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
+
+autoload -U promptinit; promptinit
+prompt lean

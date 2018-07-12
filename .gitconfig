@@ -109,13 +109,13 @@
 	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
 	precomposeunicode = false
 
-	pager = diff-so-fancy | less -R -x2
+	pager = diff-so-fancy | less --tabs=4 -RFX
 
 [color]
 
 	# Use colors in Git commands that are capable of colored output when
 	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
-	ui = auto
+	ui = true
 
 [color "branch"]
 
@@ -125,10 +125,11 @@
 
 [color "diff"]
 
-	meta = yellow bold
+	meta = 227
 	frag = magenta bold # line info
-	old = red # deletions
-	new = green # additions
+	old = red bold # deletions
+	new = green bold # additions
+	whitespace = red reverse
 
 [color "status"]
 
@@ -203,6 +204,6 @@
 [user]
 	name = Callie Dunn
 	email = q2r5@live.com
-	signingkey = 46931508D3DF3BD4
+	signingkey = 20A750C0C2C52C11
 [gpg]
-	program = gpg2
+	program = gpg

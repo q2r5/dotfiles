@@ -35,3 +35,8 @@ function remote_branch_rename() {
 }
 
 
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_CASK_OPTS=
+export BROWSER='open'
+
+export GPGKEY=FC80DEDD

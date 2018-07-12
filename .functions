@@ -17,5 +17,130 @@ command_not_found_handler() {
 # convenience to switch xcode versions
 xcswitch() {
 	sudo xcode-select -switch "/Applications/Xcode$1.app/Contents/Developer" && \
-		echo "Switched to $(xcsel -print-path)"
+		echo "Switched to $(xcode-select -print-path)"
+}
+
+# highlighted man pages!!
+# http://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
+man() {
+    env \
+        LESS_TERMCAP_mb=$'\e[1;31m' LESS_TERMCAP_md=$'\e[1;31m' \
+        LESS_TERMCAP_me=$'\e[0m' LESS_TERMCAP_se=$'\e[0m' \
+        LESS_TERMCAP_so=$'\e[1;44;33m' LESS_TERMCAP_ue=$'\e[0m' \
+        LESS_TERMCAP_us=$'\e[1;32m' \
+        man "$@"
+}
+
+extract () {
+   if [ -f $1 ] ; then
+       case $1 in
+           *.tar.bz2)   tar xvjf $1    ;;
+           *.tar.gz)    tar xvzf $1    ;;
+           *.bz2)       bunzip2 $1     ;;
+           *.rar)       unrar x $1       ;;
+           *.gz)        gunzip $1      ;;
+           *.tar)       tar xvf $1     ;;
+           *.tbz2)      tar xvjf $1    ;;
+           *.tgz)       tar xvzf $1    ;;
+           *.zip)       unzip $1       ;;
+           *.Z)         uncompress $1  ;;
+           *.7z)        7z x $1        ;;
+           *)           echo "don't know how to extract '$1'..." ;;
+       esac
+   else
+       echo "'$1' is not a valid file!"
+   fi
+}
+
+# Get software updates, and update installed Ruby gems, Homebrew, npm, and their installed packages.
+function update {
+    case $(uname) in
+        Darwin)
+            echo "\n===[ Apple Software Update ]===============================" && \
+            sudo softwareupdate -i -a
+            echo "\n===[ App Store ]===========================================" && \
+            mas upgrade
+            echo "\n===[ Homebrew ]============================================" && \
+            brew update && \
+            brew upgrade && \
+            brew cleanup -s
+            # echo "\n==[ MacPorts ]==========================================================" && \
+            # sudo port selfupdate && \
+            # sudo port outdated
+            # sudo port upgrade outdated
+            # echo "Cleaning up ..."
+            # sudo port uninstall inactive
+            # sudo port uninstall leaves
+            echo "\n===[ npm ]=================================================" && \
+            npm update -g
+            echo "\n===[ Gems ]================================================" && \
+            gem update && \
+            gem cleanup
+            echo "\n===[ pip ]=================================================" && \
+            # pip install --user --upgrade $(pip list --outdated --format=legacy | awk '/.*/ {print $1}') && \
+            pip3 install --user --upgrade $(pip3 list --outdated --format=legacy | awk '/.*/ {print $1}')
+            echo "\n===[ Chromium ]============================================" && \
+            LatestChromium
+            ;;
+        Linux)
+            echo "===[ apt-get ]=============================================" && \
+            sudo apt-get update && \
+            sudo apt-get -y upgrade && \
+            sudo apt-get -y dist-upgrade && \
+            sudo apt-get -y autoremove && \
+            sudo apt-get -y remove (deborphan)
+            # echo "==[ npm ]==========================================================" && \
+            # sudo npm install npm -g && \
+            # sudo npm update -g
+            echo "===[ Gems ]================================================" && \
+            sudo gem update
+            echo "===[ pip ]================================================="
+            if [ $(cat /etc/issue) -eq "Ubuntu" ]
+            then
+                echo "pip updates not supported on Ubuntu as some packages are owned by the system."
+            else
+                sudo python -m pip install --upgrade (python -m pip list --outdated | awk '/.*/ {print $1}') && \
+                sudo python3 -m pip install --upgrade (python3 -m pip list --outdated | awk '/.*/ {print $1}')
+            fi
+            ;;
+        FreeBSD)
+            echo "===[ System Software Update ]==============================" && \
+            freebsd-update fetch upgrade
+            echo "\n===[ Update Ports ]========================================" && \
+            portmaster -av
+            ;;
+        *)
+            echo "Not supported on (uname)."
+    esac
+}
+
+#
+# Opens man pages in Dash.app.
+#
+
+function mand {
+  if (( $# > 0 )); then
+    open "dash://man:$1" 2>/dev/null
+    if (( $? != 0 )); then
+      print "$0: Dash is not installed" >&2
+      break
+    fi
+  else
+    print 'What manual page do you want?' >&2
+  fi
+}
+
+#
+# Opens man pages in Preview.app.
+#
+
+function manp {
+  local page
+  if (( $# > 0 )); then
+    for page in "$@"; do
+      man -t "$page" | open -f -a Preview
+    done
+  else
+    print 'What manual page do you want?' >&2
+  fi
 }
