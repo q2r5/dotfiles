@@ -77,8 +77,8 @@ function update {
             gem update && \
             gem cleanup
             echo "\n===[ pip ]=================================================" && \
-            # pip install --user --upgrade $(pip list --outdated --format=legacy | awk '/.*/ {print $1}') && \
-            pip3 install --user --upgrade $(pip3 list --outdated --format=legacy | awk '/.*/ {print $1}')
+            # pip install --user --upgrade $(pip list --outdated | awk '/.*/ {print $1}') && \
+            pip3 install --user --upgrade $(pip3 list --outdated | awk '/.*/ {print $1}')
             echo "\n===[ Chromium ]============================================" && \
             LatestChromium
             ;;
