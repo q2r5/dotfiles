@@ -1,0 +1,186 @@
+@namespace xul url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* 
+Original layout by /u/Herkt https://www.reddit.com/r/FirefoxCSS/comments/7eazix/my_attempt_at_a_oneline_interface/ 
+Use with compact density
+*/
+
+:root:-moz-lwtheme-brighttext {                                      /* minor color changes to the default dark theme */
+	--color-overflow: #eee;                                            /* >> button color */
+	--chrome-background-color: #111 !important;                        /* tab strip background & inactive tabs */
+	--chrome-secondary-background-color: #222 !important;              /* nav bar & active tab */
+	--chrome-color: #ccc !important;                                   /* url & tab text, close tab & new tab buttons */
+	background: transparent !important;
+}
+
+:root:-moz-lwtheme-darktext {                                        /* minor changes to the default light theme */
+	--color-overflow: #ddd;                                            /* >> button color */
+	--chrome-background-color: #ccc !important;                        /* tab strip background & inactive tabs */
+}
+
+:root {
+  --tabs-border: transparent !important;                             /* active tab left & right borders - not working in 58?*/
+  --toolbox-border-bottom-color: transparent !important;             /* 1px line under background tabs */
+  --chrome-nav-bar-controls-border-color: transparent !important;    /* border around url bar */
+}
+
+/* Move Tab-bar beside Nav-bar */
+#TabsToolbar {
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+  margin-left: 35vw !important;
+  max-height: 35px !important;
+  height: 30px !important;
+}
+
+#nav-bar {
+  margin-top: -30px !important;
+  margin-left: 0px !important;
+  margin-right: 65vw !important;
+  height: 30px;
+  background-color: #2a2a2e !important;
+}
+
+#navigator-toolbox {
+	border-bottom: 0px solid var(--chrome-content-separator-color) !important;
+} /* hide line at the bottom of tabbar */
+
+#urlbar-container, #search-container {
+  padding-block: 0px !important;
+	margin-inline: 0px !important;
+} /* hide space between urlbar and tabbar also fill addressbar with urlbar */
+
+.tabbrowser-tab {
+	height: 30px !important;
+	min-width: 50px !important;
+	max-width: 150px !important;
+} /* set tabs height and width */
+
+#urlbar {
+	background-color: transparent !important;  /* Transparent URL Bar */
+	border-style: none !important;
+	margin-bottom: 0 !important;
+	margin-top: 0 !important;
+	min-height: 32px !important;
+	padding-top: 1px !important;
+}
+
+#urlbar * {
+	color: #eee;
+}
+
+#nav-bar > toolbarbutton,
+#nav-bar #nav-bar-customization-target > toolbarbutton {
+	max-height: 30px !important;
+}
+
+:root:not([customizing]) #nav-bar #back-button[disabled=true],
+:root:not([customizing]) #nav-bar #forward-button[disabled=true] {
+	display: none;
+}
+
+/* Remove padding above tabbar in compact mode */
+#main-window[sizemode="normal"] > #titlebar {
+	-moz-appearance: initial !important;
+}
+
+/* Move hamburger menu to the left */
+#PanelUI-button, .panel-arrow { -moz-box-ordinal-group: 0 !important; }
+
+/* More tools... button */
+#nav-bar-overflow-button { 
+	transform: scale(0.9, 0.9) !important;
+	fill: var(--color-overflow) !important;
+}
+
+/* Tabs */
+.tabbrowser-tab:not([selected="true"]) {
+	background: transparent !important;
+	color: #eee !important;
+	border: none !important;
+}
+
+/* Remove border between tabs
+Delete this rule if you want separators between background tabs */
+.tabbrowser-tab::after, .tabbrowser-tab::before {
+  border-left: none !important;
+}
+
+/* Border between background tabs */
+/*.tabbrowser-tab::after, .tabbrowser-tab::before {
+	color: grey !important; 
+	opacity: .2 !important; 
+	transform: scale(1, 0.6);
+}*/
+
+/* New tab button color */
+#new-tab-button, .tabs-newtab-button {
+  fill: var(--chrome-color) !important;
+}
+
+/* tab line - adjust color & size, default #0a84ff 2px */
+.tab-line {
+	background-color: #0a84ff !important;
+	height: 0px !important;
+}
+
+.tabbrowser-tab:not([selected="true"]) .tab-close-button {
+	display: none !important;
+}
+
+.tabbrowser-tab:not([selected="true"]):not([pinned="true"]):hover .tab-close-button {
+	display: -moz-box !important;
+}
+
+/* Hide various elements */
+/* Menu */
+/*#appMenu-fxa-container,                    /* Sign in to Sync */
+/*#appMenu-fxa-container+toolbarseparator,
+/* #appMenuRestoreLastSession, *//*
+#appMenu-zoom-controls,
+#appMenu-zoom-controls+toolbarseparator,
+#appMenu-edit-controls,
+#appMenu-edit-controls+toolbarseparator,
+#appMenu-library-button,
+#appMenu-customize-button,
+#appMenu-customize-button+toolbarseparator,
+#appMenu-open-file-button,
+#appMenu-save-file-button,
+#appMenu-find-button,
+#appMenu-more-button,
+*//* URL Bar */
+#pageActionButton,
+#page-action-buttons,
+#pocket-button-box,
+ar-button,
+.autocomplete-history-dropmarker,
+#identity-icon-labels
+{
+    display: none !important;
+}
+
+/* Remove window buttons (Close, Minimize, Fullscreen) */
+#TabsToolbar .titlebar-spacer, .titlebar-buttonbox-container {display: none !important; }
+
+/* Mac Transparency */
+:root #nav-bar,
+#PersonalToolbar,
+#titlebar,
+.tab-background[selected="true"] {
+	-moz-appearance: -moz-mac-vibrant-titlebar-dark !important;
+	-moz-font-smoothing-background-color: -moz-mac-vibrant-titlebar-dark !important;
+}
+
+/* Prevents White pre-load flash */
+.browserContainer { background-color: #333 !important; }
+.tabbrowser tabpanels { background-color: #333 !important; }
+
+menupopup {
+	-moz-appearance: -moz-mac-vibrancy-dark !important;
+	-moz-font-smoothing-background-color: -moz-mac-vibrant-titlebar-dark !important;
+	color: #ddd !important;
+}
+
+menupopup * {
+	-moz-appearance: none !important;
+}

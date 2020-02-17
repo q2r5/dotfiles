@@ -1,0 +1,207 @@
+@namespace xul url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+ .tab-background,
+ .tabbrowser-tab,
+ #nav-bar,
+ #navigator-toolbox,
+ #PersonalToolbar,
+ #urlbar,
+ #urlbar .urlbar-input-box,
+ .tabbrowser-tab,
+ #tabbrowser-tabs,
+ #TabsToolbar,
+ tab,
+ .tabbrowser-tab::after,
+ .tabbrowser-tab::before,
+ .tabbrowser-tab[first-tab],
+ #toolbar-menubar,
+ findbar,
+ .titlebar-spacer {
+   border: none !important;
+ }
+ 
+/*  #main-window:not([lwthemetextcolor="bright"]):not([lwthemetextcolor="dark"]) .tab-content {
+     color: #ccc !important;
+ }
+ 
+ #main-window:not([lwthemetextcolor="bright"]):not([lwthemetextcolor="dark"]) .tab-content[selected] {
+     color: #fff !important;
+ }
+ 
+ #main-window:not([lwthemetextcolor="bright"]):not([lwthemetextcolor="dark"]) #TabsToolbar {
+     -moz-appearance: -moz-mac-vibrancy-dark !important;
+ } */
+ 
+ #TabsToolbar,
+ .tab-background-inner,
+ #nav-bar,
+ .theme-dark,
+ .theme-light,
+ slider,
+ .CodeMirror,
+ .devtools-toolbar,
+ .message,
+ .theme-body,
+ .table-widget-empty-text,
+ findbar,
+ #PersonalToolbar {
+    -moz-appearance: -moz-mac-vibrancy-light !important;
+ }
+ 
+ #main-window[lwthemetextcolor="bright"] #TabsToolbar,
+ #main-window[lwthemetextcolor="bright"] .tab-background-inner,
+ #main-window[lwthemetextcolor="bright"] #nav-bar,
+ #main-window[lwthemetextcolor="bright"] .theme-dark,
+ #main-window[lwthemetextcolor="bright"] .theme-light,
+ #main-window[lwthemetextcolor="bright"] slider,
+ #main-window[lwthemetextcolor="bright"] .CodeMirror,
+ #main-window[lwthemetextcolor="bright"] .devtools-toolbar,
+ #main-window[lwthemetextcolor="bright"] .message,
+ #main-window[lwthemetextcolor="bright"] .theme-body,
+ #main-window[lwthemetextcolor="bright"] .table-widget-empty-text,
+ #main-window[lwthemetextcolor="bright"] findbar,
+ #main-window[lwthemetextcolor="bright"] #PersonalToolbar {
+     -moz-appearance: -moz-mac-vibrancy-dark !important;
+ }
+ 
+ #main-window[lwthemetextcolor="bright"][lwt-popup-darktext="true"] #nav-bar {
+      -moz-appearance: -moz-mac-vibrancy-light !important;
+      color: #000 !important;
+ }
+ 
+ .titlebar-spacer {
+     width: 10px !important;
+ }
+ 
+ /* Fabicon icon when mouse over to pinned inactive tab grayscale(15%) */
+ .tabbrowser-tab:hover .tab-icon-image[pinned] {
+  filter: grayscale(15%) !important;
+ }
+ 
+ /* Fabicon icon on pinned inactive tab grayscale(35%) */
+ .tabbrowser-tab .tab-icon-image[pinned] {
+  filter: grayscale(35%) !important;
+ }
+ 
+ /* Favicon icon when mouse over over inactive tab grayscale(15%) */
+ .tabbrowser-tab:hover .tab-icon-image:not([selected=true]):not([pinned]) {
+  filter: grayscale(15%) !important;
+ }
+ 
+ /* Gray out the favicon icon on the inactive tab */
+ .tabbrowser-tab .tab-icon-image:not([selected=true]):not([pinned]) {
+  filter: grayscale(100%) !important;
+ }
+ 
+ /* Tab labels */
+ #main-window[lwthemetextcolor="dark"] tab {
+     color: #333 !important;
+ }
+ #main-window[lwthemetextcolor="dark"] tab:hover {
+     color: #000 !important;
+ }
+ #main-window[lwthemetextcolor="dark"] tab[selected] {
+     color: #000 !important;
+ }
+ 
+ /* Tab labels */
+ #main-window[lwthemetextcolor="bright"] tab {
+     color: #ccc !important;
+ }
+ #main-window[lwthemetextcolor="bright"] tab:hover {
+     color: #fff !important;
+ }
+ #main-window[lwthemetextcolor="bright"] tab[selected] {
+     color: #fff !important;
+ }
+ 
+ .tabbrowser-tab:not(:hover) .tab-close-button{
+     display:none;
+ }
+ .tabbrowser-tab:not([pinned]):hover .tab-close-button{
+     display:block !important;
+     transition: 0.9s;
+ }
+ 
+ .tabbrowser-tab:not([pinned]):hover  .tab-icon-image {
+   display: none !important;
+ }
+ 
+ .tabbrowser-tab:hover  .tab-throbber,
+ .tabbrowser-tab:hover  .tab-icon-image,
+ .tabbrowser-tab:hover .tab-sharing-icon-overlay,
+ .tabbrowser-tab:hover  .tab-icon-overlay,
+ .tabbrowser-tab:hover  .tab-label-container,
+ .tabbrowser-tab:hover  .tab-icon-sound {
+    -moz-box-ordinal-group: 2 !important;
+ }
+ 
+ .tabbrowser-tab .tab-close-button {
+   margin-left: -2px !important;
+   margin-right: 4px !important;
+ }
+ 
+ .tab-icon-image:not([src]) {
+     width: 16px !important;
+     height: 16px !important;
+     display: block !important;
+ }
+ 
+ #tabbrowser-tabs {
+     --tab-line-color: -moz-menuhover !important;
+ }
+ 
+ .tab-line:not([selected=true]) {
+     background-color: -moz-mac-focusring !important;
+ }
+
+/* Custom */
+
+:root {
+  --tabs-border: transparent !important;                             /* active tab left & right borders - not working in 58?*/
+  --toolbox-border-bottom-color: transparent !important;             /* 1px line under background tabs */
+  --chrome-nav-bar-controls-border-color: transparent !important;    /* border around url bar */
+}
+
+:root:-moz-lwtheme-brighttext {                                      /* minor color changes to the default dark theme */
+	background: transparent !important;
+}
+
+/* Mac Transparency */
+:root #nav-bar,
+#PersonalToolbar,
+#titlebar,
+.tab-background[selected="true"] {
+	-moz-appearance: -moz-mac-vibrant-titlebar-dark !important;
+	-moz-font-smoothing-background-color: -moz-mac-vibrant-titlebar-dark !important;
+}
+
+:root:not([customizing]) #nav-bar #back-button[disabled=true],
+:root:not([customizing]) #nav-bar #forward-button[disabled=true] {
+	display: none;
+}
+
+#urlbar-container, #search-container {
+    padding-block: 0px !important;
+    margin-inline: 0px !important;
+} /* hide space between urlbar and tabbar also fill addressbar with urlbar */
+
+/* Remove padding above tabbar in compact mode */
+#main-window[sizemode="normal"] > #titlebar {
+	-moz-appearance: initial !important;
+}
+
+/* Remove window buttons (Close, Minimize, Fullscreen) */
+#TabsToolbar .titlebar-spacer, .titlebar-buttonbox-container {
+    display: none !important;
+}
+
+menupopup {
+	-moz-appearance: -moz-mac-vibrancy-dark !important;
+	-moz-font-smoothing-background-color: -moz-mac-vibrant-titlebar-dark !important;
+	color: #ddd !important;
+}
+
+menupopup * {
+	-moz-appearance: none !important;
+}
