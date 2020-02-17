@@ -77,10 +77,12 @@ function update {
             gem update && \
             gem cleanup
             echo "\n===[ pip ]=================================================" && \
-            # pip install --user --upgrade $(pip list --outdated | awk '/.*/ {print $1}') && \
-            pip3 install --user --upgrade $(pip3 list --outdated | awk '/.*/ {print $1}')
+            # pip2 install --upgrade $(pip2 list --outdated | awk '/.*/ {print $1}') && \
+            pip3 install -U $(pip3 list --outdated --format freeze | awk -F "==" '/.[^\W\d]*/{print $1}')
             echo "\n===[ Chromium ]============================================" && \
             LatestChromium
+            echo "\n===[ Rust ] ===============================================" && \
+            rustup update
             ;;
         Linux)
             echo "===[ apt-get ]=============================================" && \

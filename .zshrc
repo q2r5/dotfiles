@@ -8,7 +8,7 @@ export LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
 
 export TZ=:/etc/localtime
 
-export ZSH=$(dirname $0)/.oh-my-zsh
+# export ZSH=$(dirname $0)/.oh-my-zsh
 
 if [[ ! -z "$SSH_CLIENT" && -z "$TMUX" ]]; then
 	tmux attach || tmux
@@ -38,7 +38,7 @@ fi
 
 fpath=("$(dirname $0)/.zfunctions" $fpath)
 
-safe_source $ZSH/oh-my-zsh.sh
+# safe_source $ZSH/oh-my-zsh.sh
 
 safe_source $(dirname $0)/.path
 safe_source $(dirname $0)/.aliases
@@ -57,9 +57,7 @@ safe_source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 safe_source $(dirname $(gem which colorls))/tab_complete.sh
 
-if has ruby && has gem; then
-    PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-fi
+eval $(thefuck --alias)
 
 autoload -U promptinit; promptinit
-prompt lean
+prompt pure

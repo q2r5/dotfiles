@@ -39,4 +39,6 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_CASK_OPTS=
 export BROWSER='open'
 
-export GPGKEY=FC80DEDD
+export GPGKEY=C2C52C11
+
+export GPG_TTY=$(tty)

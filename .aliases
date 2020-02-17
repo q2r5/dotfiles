@@ -134,8 +134,6 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 # Reload the shell (i.e. invoke as a login shell)
 alias reload=". ~/.zshrc"
 
-alias python2="/usr/bin/python"
-
 # cross-platform normalisation
 if has afplay; then
 	alias play=afplay
@@ -147,8 +145,8 @@ if [[ $VENDOR == apple ]]; then
 	alias ping='ping --apple-time'
 fi
 
-alias pbcopy=clipcopy
-alias pbpaste=clippaste
+#alias pbcopy=clipcopy
+#alias pbpaste=clippaste
 
 # if we have hub, alias git to it
 if has hub; then
@@ -162,7 +160,6 @@ export TVIDEO_CLIENT='fzhi8mp9349wo66wywfy88yo789lt99'
 export TVIDEO_OAUTH='veaph0fgyirpude0zihoqhi2nmt0f0'
 
 export TWITCH_OAUTH='kizdtzcwnphwzpluyoh1dq1ewrxlc1'
-alias twitch="livestreamer --twitch-oauth-token ${TWITCH_OAUTH}
---default-stream best"
+alias twitch="streamlink --player "iina-cli" --player-passthrough hls --twitch-oauth-token ${TWITCH_OAUTH} --default-stream best"
 
 alias mktemp="command gmktemp"
