@@ -30,6 +30,9 @@ export EDITOR="$VISUAL"
 
 export GOPATH=/usr/local/lib/go
 
+export STARSHIP_CONFIG=$(dirname $0)/.starship.toml
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
 if [[ "$SHELL" != "/usr/bin/zsh" ]] && has brew; then
 	unalias run-help 2>/dev/null
 	autoload run-help
@@ -59,5 +62,7 @@ safe_source $(dirname $(gem which colorls))/tab_complete.sh
 
 eval $(thefuck --alias)
 
-autoload -U promptinit; promptinit
-prompt pure
+# autoload -U promptinit; promptinit
+# prompt pure
+
+eval $(starship init zsh)
