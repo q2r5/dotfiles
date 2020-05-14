@@ -162,6 +162,6 @@ export TVIDEO_CLIENT='fzhi8mp9349wo66wywfy88yo789lt99'
 export TVIDEO_OAUTH='veaph0fgyirpude0zihoqhi2nmt0f0'
 
 export TWITCH_OAUTH='kizdtzcwnphwzpluyoh1dq1ewrxlc1'
-alias twitch="streamlink --player "iina-cli" --player-passthrough hls --twitch-oauth-token ${TWITCH_OAUTH} --default-stream best"
+alias twitch="streamlink --player \"iina-cli\" --player-passthrough hls --twitch-oauth-token ${TWITCH_OAUTH} --default-stream best"
 
 alias mktemp="command gmktemp"
