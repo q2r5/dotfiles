@@ -6,7 +6,9 @@ export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
 
 export TERM=xterm-256color
 
-export LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
+if [[ -z $LANG || -z $LC_CTYPE ]]; then
+	export LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
+fi
 
 export TZ=:/etc/localtime
 
@@ -24,16 +26,21 @@ safe_source() {
 	[[ -f "$1" ]] && source "$1"
 }
 
-export VISUAL='nano'
-export EDITOR="$VISUAL"
+export VISUAL='code-insiders'
+export EDITOR='nano'
 
 # Used to set editor over SSH, only use if editor is non-standard
-# [[ ! -z "$SSH_CLIENT" ]] && export VISUAL=nano && export EDITOR="$VISUAL"
+[[ ! -z "$SSH_CLIENT" ]] && export VISUAL=nano && export EDITOR="$VISUAL"
 
 export GOPATH=/usr/local/lib/go
 
 export STARSHIP_CONFIG=$(dirname $0)/.starship.toml
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+safe_source $(dirname $0)/.path
+safe_source $(dirname $0)/.aliases
+safe_source $(dirname $0)/.functions
+safe_source $(dirname $0)/.extra
 
 if [[ "$SHELL" != "/usr/bin/zsh" ]] && has brew; then
 	unalias run-help 2>/dev/null
@@ -41,14 +48,16 @@ if [[ "$SHELL" != "/usr/bin/zsh" ]] && has brew; then
 	HELPDIR=/usr/local/share/zsh/help
 fi
 
+if has brew; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
 fpath=("$(dirname $0)/.zfunctions" $fpath)
 
 # safe_source $ZSH/oh-my-zsh.sh
-
-safe_source $(dirname $0)/.path
-safe_source $(dirname $0)/.aliases
-safe_source $(dirname $0)/.functions
-safe_source $(dirname $0)/.extra
 safe_source ~/.iterm2_shell_integration.zsh
 
 case $TERM in
@@ -57,10 +66,10 @@ case $TERM in
         ;;
 esac
 
+safe_source $(dirname $(gem which colorls))/tab_complete.sh
+
 safe_source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 safe_source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-safe_source $(dirname $(gem which colorls))/tab_complete.sh
 
 eval $(thefuck --alias)
 

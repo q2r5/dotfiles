@@ -63,7 +63,8 @@ function update {
             echo "\n===[ Homebrew ]============================================" && \
             brew update && \
             brew upgrade && \
-            brew cleanup -s
+            brew cleanup -s && \
+            brew cask upgrade
             # echo "\n==[ MacPorts ]==========================================================" && \
             # sudo port selfupdate && \
             # sudo port outdated
