@@ -43,3 +43,8 @@ export BROWSER='open'
 export GPGKEY=C2C52C11
 
 export GPG_TTY=$(tty)
+
+export SQLCIPHER_LIB_DIR=$HOME/Developer/application-services/libs/desktop/darwin/sqlcipher/lib
+export SQLCIPHER_INCLUDE_DIR=$HOME/Developer/application-services/libs/desktop/darwin/sqlcipher/include
+export NSS_DIR=$HOME/Developer/application-services/libs/desktop/darwin/nss
+export NSS_STATIC=1

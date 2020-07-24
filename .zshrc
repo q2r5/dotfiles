@@ -26,7 +26,7 @@ safe_source() {
 	[[ -f "$1" ]] && source "$1"
 }
 
-export VISUAL='code-insiders'
+export VISUAL='nano'
 export EDITOR='nano'
 
 # Used to set editor over SSH, only use if editor is non-standard

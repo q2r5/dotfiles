@@ -52,6 +52,11 @@ extract () {
    fi
 }
 
+# rm to trash
+rm() {
+	rmtrash "$@"
+}
+
 # Get software updates, and update installed Ruby gems, Homebrew, npm, and their installed packages.
 function update {
     case $(uname) in
