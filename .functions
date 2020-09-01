@@ -57,6 +57,15 @@ rm() {
 	rmtrash "$@"
 }
 
+function gem {
+    if [[ $1 == "install" ]]; then
+        gemargs="$@"
+        command gem install --user-install ${gemargs:8}
+    else
+        command gem "$@"
+    fi
+}
+
 # Get software updates, and update installed Ruby gems, Homebrew, npm, and their installed packages.
 function update {
     case $(uname) in

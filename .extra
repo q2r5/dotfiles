@@ -31,9 +31,9 @@ function release() {
 
 #NOTE: This will destroy the remote branch
 function remote_branch_rename() {
-  git branch -m $1 $2 &&\
-  git push origin :$1 &&\
-  git push origin $2
+  git branch -m "$1" "$2" &&\
+  git push origin ":$1" &&\
+  git push origin "$2"
 }
 
 export HOMEBREW_NO_ANALYTICS=1
@@ -44,7 +44,13 @@ export GPGKEY=C2C52C11
 
 export GPG_TTY=$(tty)
 
+export GITHUB_ACCESS_TOKEN=f3f32aff22c8debda0598beaeede73acde576ca0
+
 export SQLCIPHER_LIB_DIR=$HOME/Developer/application-services/libs/desktop/darwin/sqlcipher/lib
 export SQLCIPHER_INCLUDE_DIR=$HOME/Developer/application-services/libs/desktop/darwin/sqlcipher/include
 export NSS_DIR=$HOME/Developer/application-services/libs/desktop/darwin/nss
 export NSS_STATIC=1
+
+export GUILE_LOAD_PATH="/usr/local/share/guile/site/3.0"
+export GUILE_LOAD_COMPILED_PATH="/usr/local/lib/guile/3.0/site-ccache"
+export GUILE_SYSTEM_EXTENSIONS_PATH="/usr/local/lib/guile/3.0/extensions"

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # config
 shopt -s dotglob
@@ -27,12 +27,12 @@ run brew link --force bzip2 curl perl sqlite3
 
 # TODO: class-dump is broken
 
-for i in $brewdir/opt/{coreutils,findutils,gnu-sed,gnu-tar,gnu-which,grep,make}/bin/g*; do
-	name=$(basename $i)
+for i in "$brewdir"/opt/{coreutils,findutils,gnu-sed,gnu-tar,gnu-which,grep,make}/bin/g*; do
+	name=$(basename "$i")
 	newname=$brewdir/bin/${name:1}
 
 	if [[ ! -f $newname ]]; then
-		run ln -s $i $newname
+		run ln -s "$i" "$newname"
 	fi
 done
 
@@ -45,4 +45,4 @@ for i in .gitconfig .htoprc .lldbinit .nanorc .nicrc do
 	fi
 done
 
-run echo "source "$PWD"/.zshrc" >> ~/.zshrc
+run echo "source $PWD/.zshrc" >> ~/.zshrc
