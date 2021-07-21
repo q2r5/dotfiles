@@ -1,28 +1,28 @@
 #!/usr/bin/env zsh
 
 # handle command not found by displaying packages that contain the command
-command_not_found_handler() {
+function command_not_found_handler() {
 	# lazy load the proper handler on the first run
 	if has brew && brew command command-not-found-init >/dev/null; then
 		eval "$(brew command-not-found-init)"
-		command_not_found_handler $*
+		command_not_found_handler "$@"
 	elif [[ -x /etc/zsh_command_not_found ]]; then
 		source /etc/zsh_command_not_found
-		command_not_found_handler $*
+		command_not_found_handler "$@"
 	else
 		return 127
 	fi
 }
 
 # convenience to switch xcode versions
-xcswitch() {
+function xcswitch() {
 	sudo xcode-select -switch "/Applications/Xcode$1.app/Contents/Developer" && \
 		echo "Switched to $(xcode-select -print-path)"
 }
 
 # highlighted man pages!!
 # http://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
-man() {
+function man() {
     env \
         LESS_TERMCAP_mb=$'\e[1;31m' LESS_TERMCAP_md=$'\e[1;31m' \
         LESS_TERMCAP_me=$'\e[0m' LESS_TERMCAP_se=$'\e[0m' \
@@ -31,20 +31,20 @@ man() {
         man "$@"
 }
 
-extract () {
-   if [ -f $1 ] ; then
+function extract () {
+   if [ -f "$1" ] ; then
        case $1 in
-           *.tar.bz2)   tar xvjf $1    ;;
-           *.tar.gz)    tar xvzf $1    ;;
-           *.bz2)       bunzip2 $1     ;;
-           *.rar)       unrar x $1       ;;
-           *.gz)        gunzip $1      ;;
-           *.tar)       tar xvf $1     ;;
-           *.tbz2)      tar xvjf $1    ;;
-           *.tgz)       tar xvzf $1    ;;
-           *.zip)       unzip $1       ;;
-           *.Z)         uncompress $1  ;;
-           *.7z)        7z x $1        ;;
+           *.tar.bz2)   tar xvjf "$1"    ;;
+           *.tar.gz)    tar xvzf "$1"    ;;
+           *.bz2)       bunzip2 "$1"     ;;
+           *.rar)       unrar x "$1"     ;;
+           *.gz)        gunzip "$1"      ;;
+           *.tar)       tar xvf "$1"     ;;
+           *.tbz2)      tar xvjf "$1"    ;;
+           *.tgz)       tar xvzf "$1"    ;;
+           *.zip)       unzip "$1"       ;;
+           *.Z)         uncompress "$1"  ;;
+           *.7z)        7z x "$1"        ;;
            *)           echo "don't know how to extract '$1'..." ;;
        esac
    else
@@ -52,19 +52,14 @@ extract () {
    fi
 }
 
-# rm to trash
-rm() {
-	rmtrash "$@"
-}
-
-function gem {
-    if [[ $1 == "install" ]]; then
-        gemargs="$@"
-        command gem install --user-install ${gemargs:8}
-    else
-        command gem "$@"
-    fi
-}
+# function gem {
+#     if [[ $1 == "install" ]]; then
+#         gemargs="$@"
+#         command gem install --user-install ${gemargs:8}
+#     else
+#         command gem "$@"
+#     fi
+# }
 
 # Get software updates, and update installed Ruby gems, Homebrew, npm, and their installed packages.
 function update {
@@ -78,14 +73,15 @@ function update {
             brew update && \
             brew upgrade && \
             brew cleanup -s && \
-            brew cask upgrade
-            # echo "\n==[ MacPorts ]==========================================================" && \
-            # sudo port selfupdate && \
-            # sudo port outdated
-            # sudo port upgrade outdated
-            # echo "Cleaning up ..."
-            # sudo port uninstall inactive
-            # sudo port uninstall leaves
+            if has port; then
+              echo "\n==[ MacPorts ]==========================================================" && \
+              sudo port selfupdate && \
+              sudo port outdated
+              sudo port upgrade outdated
+              echo "Cleaning up ..."
+              sudo port uninstall inactive
+              sudo port uninstall leaves
+            fi
             echo "\n===[ npm ]=================================================" && \
             npm update -g
             echo "\n===[ Gems ]================================================" && \
@@ -93,9 +89,9 @@ function update {
             gem cleanup
             echo "\n===[ pip ]=================================================" && \
             # pip2 install --upgrade $(pip2 list --outdated | awk '/.*/ {print $1}') && \
-            pip3 install -U $(pip3 list --outdated --format freeze | awk -F "==" '/.[^\W\d]*/{print $1}')
-            echo "\n===[ Chromium ]============================================" && \
-            LatestChromium
+            pip install -U $(pip list --outdated --format freeze | awk -F "==" '/.[^\W\d]*/{print $1}')
+            #echo "\n===[ Chromium ]============================================" && \
+            #LatestChromium
             echo "\n===[ Rust ] ===============================================" && \
             rustup update
             ;;
@@ -140,7 +136,7 @@ function mand {
     open "dash://man:$1" 2>/dev/null
     if (( $? != 0 )); then
       print "$0: Dash is not installed" >&2
-      break
+      return
     fi
   else
     print 'What manual page do you want?' >&2
@@ -174,4 +170,41 @@ function dataurl() {
 		mimeType="${mimeType};charset=utf-8";
 	fi
 	echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
+}
+
+function hextorgb() {
+	printf "%d %d %d\n" \
+		"0x${1:0:2}" \
+		"0x${1:2:2}" \
+		"0x${1:4:2}"
+}
+
+function rgbtohex() {
+	printf "%02X%02X%02X\n" "$@"
+}
+
+# display term colours
+function c07() {
+	for i in 0 1 2 3 4 5 6 7; do
+		printf '\033[%sm   \033[0m' "$1$i"
+	done; echo
+}
+
+function blocks() {
+	echo
+	c07 4
+	c07 10
+	echo
+}
+
+# preview hex colour
+function prev() {
+	[ "$@" ] || { set -- "$(cat /dev/stdin)"; }
+	[ "$n" ] && [ "$n" -le 220 ] || n=30
+	for i; do
+		printf "\033]4;%s;#%s\007" "$n" "$i"
+		printf "\033[38;05;%sm%s\033[0m   \033[48;05;%sm       \033[0m\n" \
+			"$n" "$i" "$n"
+		n=$((n+1))
+	done
 }
