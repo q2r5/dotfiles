@@ -1,6 +1,8 @@
 [submodule "pure"]
 	path = pure
 	url = git://github.com/sindresorhus/pure.git
+	branch = main
 [submodule "lean"]
 	path = lean
 	url = git://github.com/miekg/lean.git
+	branch = master
