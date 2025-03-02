@@ -69,7 +69,7 @@ function update {
             echo "\n===[ Apple Software Update ]===============================" && \
             sudo softwareupdate -i -a
             echo "\n===[ App Store ]===========================================" && \
-#            mas upgrade # Broken on ARM, pulling iOS updates
+            mas upgrade
             echo "\n===[ Homebrew ]============================================" && \
             brew update && \
             brew upgrade && \
@@ -88,11 +88,10 @@ function update {
             echo "\n===[ Gems ]================================================" && \
             gem update && \
             gem cleanup
-            echo "\n===[ pip ]=================================================" && \
+            # echo "\n===[ pip ]=================================================" && \
+						# Disabled on macOS [TODO: Determine if brew install] (PEP 668)
             # pip2 install --upgrade $(pip2 list --outdated | awk '/.*/ {print $1}') && \
-            pip install -U $(pip list --outdated --format json | jq -r 'map(.name) | join(" ")')
-            #echo "\n===[ Chromium ]============================================" && \
-            #LatestChromium
+            # pip install -U $(pip list --outdated --format json | jq -r 'map(.name) | join(" ")')
             echo "\n===[ Rust ] ===============================================" && \
             rustup update
             ;;
@@ -126,22 +125,6 @@ function update {
         *)
             echo "Not supported on (uname)."
     esac
-}
-
-#
-# Opens man pages in Dash.app.
-#
-
-function mand {
-  if (( $# > 0 )); then
-    open "dash://man:$1" 2>/dev/null
-    if (( $? != 0 )); then
-      print "$0: Dash is not installed" >&2
-      return
-    fi
-  else
-    print 'What manual page do you want?' >&2
-  fi
 }
 
 #
@@ -216,27 +199,6 @@ function flac2alac() {
 	else
 		ffmpeg -i $1 -c:v copy -c:a alac $1:t:r.m4a
 	fi
-}
-
-# Freeze and unfreeze processes (for example: stop firefox)
-function stop(){
-  if [ $# -ne 1 ]; then
-          echo 1>&2 Usage: stop process
-  else
-    PROCESS=$1
-    echo "Stopping processes with the word ${tGreen}$1${tReset}"
-    ps axw | grep -i $1 | awk -v PROC="$1" '{print $1}' | xargs kill -STOP
-  fi
-}
-
-function cont(){
-  if [ $# -ne 1 ]; then
-          echo 1>&2 Usage: cont process
-  else
-    PROCESS=$1
-    echo "Continuing processes with the word ${tGreen}$1${tReset}"
-    ps axw | grep -i $1 | awk -v PROC="$1" '{print $1}' | xargs kill -CONT
-  fi
 }
 
 function mktouch() {

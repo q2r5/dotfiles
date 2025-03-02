@@ -1,8 +1,11 @@
 [submodule "pure"]
 	path = pure
-	url = git://github.com/sindresorhus/pure.git
+	url = https://github.com/sindresorhus/pure
 	branch = main
 [submodule "lean"]
 	path = lean
-	url = git://github.com/miekg/lean.git
+	url = https://github.com/miekg/lean
 	branch = master
+[submodule "zsh-autoswitch-virtualenv"]
+	path = zsh-autoswitch-virtualenv
+	url = https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv

@@ -42,6 +42,8 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 export SUDO_PROMPT=$'pass for\033[38;05;5m %u\033[0m '
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 #
 #   History
 #
@@ -65,6 +67,8 @@ safe_source $(dirname $0)/.path
 safe_source $(dirname $0)/.aliases
 safe_source $(dirname $0)/.functions
 safe_source $(dirname $0)/.extra
+
+safe_source $(dirname $0)/zsh-autoswitch-virtualenv/autoswitch_virtualenv.plugin.zsh
 
 if [[ "$SHELL" != "/usr/bin/zsh" ]] && has brew; then
 	unalias run-help 2>/dev/null
@@ -108,87 +112,18 @@ case $TERM in
         ;;
 esac
 
-safe_source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-safe_source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+safe_source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+safe_source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 safe_source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 if has thefuck; then
     eval $(thefuck --alias)
 fi
 
-autoload -U promptinit; promptinit
-prompt pure
+#fpath+=($(dirname $0)/pure)
+#autoload -U promptinit; promptinit
+#prompt pure
 
-# if has starship; then
-#     eval "$(starship init zsh)"
-# fi
-
-## https://github.com/llimllib/personal_code/blob/0e1034f13b31f8357c399d3159867601869e23de/homedir/.zshrc
-# # set git up for prompt
-# # https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh
-# autoload -Uz vcs_info
-# precmd_vcs_info() { vcs_info }
-# precmd_functions+=( precmd_vcs_info )
-# setopt prompt_subst
-# # left version
-# # zstyle ':vcs_info:git:*' formats '%K{yellow}%F{black}  %b %F{yellow}'
-# # right version
-# zstyle ':vcs_info:git:*' formats '%F{yellow}%F{black}%K{yellow}  %b %F{yellow}'
-
-# # fancy hand-made powerline-style prompt. The trick is to switch the foreground
-# # color of the arrow to the background color of the preceding section, and the
-# # background color of the arrow to the background of the following section
-# #
-# # Here's a printf that may help demonstrate the effect:
-# # printf "%b%bhome\xee\x82\xb1some-branch%b\n" "\e[30m" "\e[44m" "\e[0m"
-# # however, we can't use those same sorts of escapes in a PROMPT, so we use
-# # zsh's instead
-# #
-# # The %(5~|...) thing shortens the path when you're deep in a tree to:
-# # `first segment/.../last/three/segments`, otherwise displays four segments
-# # https://unix.stackexchange.com/a/273567
-# #
-# # https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
-# #
-# function makeprompt() {
-#     local prompt=''
-
-#     # status of last command. Green check if success, Red code if failure
-#     prompt+="%(?.%K{green}%F{black}√ %F{green}.%K{red}%F{black}%? %F{red})"
-
-#     # machine name in blue
-#     prompt+="%K{blue}%F{black}  %m %F{blue}"
-
-#     # current directory, limited to 4 segments, in green
-#     prompt+="%K{green}%F{black}   %(5~|%-1~/…/%3~|%4~) %F{green}"
-
-#     # prompt+='${vcs_info_msg_0_}'
-
-#     # reset colors
-#     LF=$'\n'
-#     prompt+="%k%f ${LF}$ "
-
-#     echo "$PROMPT"
-# }
-
-# # to debug:
-# # echo "$(makeprompt)"
-# export PS1="$(makeprompt)"
-
-# # The right prompt should be on the same line as the first line of the left
-# # prompt. To do so, there is just a quite ugly workaround: Before zsh draws
-# # the RPROMPT, we advise it, to go one line up. At the end of RPROMPT, we
-# # advise it to go one line down. See:
-# # http://superuser.com/questions/357107/zsh-right-justify-in-ps1
-# local RPROMPT_PREFIX='%{'$'\e[1A''%}' # one line up
-# local RPROMPT_SUFFIX='%{'$'\e[1B''%}' # one line down
-
-# # show the time on the right
-# # export RPROMPT='%F{blue}%t'
-# # with git branch (currently moved to left)
-# export RPROMPT='${RPROMPT_PREFIX}${vcs_info_msg_0_}%F{magenta}%F{black}%K{magenta}%t${RPROMPT_SUFFIX}'
-# #export RPROMPT="${RPROMPT_PREFIX}%F{magenta}%F{black}%K{magenta}%t${RPROMPT_SUFFIX}"
-
-# # remove the useless space at the right of rprompt
-# # https://superuser.com/a/726509/55099
-# export ZLE_RPROMPT_INDENT=0
+if has starship; then
+    eval "$(starship init zsh)"
+fi

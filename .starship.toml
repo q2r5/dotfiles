@@ -1,63 +1,51 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
 command_timeout = 1000
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break\
+$python\
+$character"""
 
-[aws]
-symbol = " "
+[directory]
+style = "blue"
 
-[battery]
-full_symbol = ""
-charging_symbol = ""
-discharging_symbol = ""
-
-[conda]
-symbol = " "
-
-[docker_context]
-symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
 
 [git_branch]
-symbol = " "
+format = "[$branch]($style)"
+style = "bright-black"
+ignore_branches = ['master','main']
 
-[golang]
-symbol = " "
+[git_status]
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+style = "cyan"
+conflicted = "​"
+untracked = "​"
+modified = "​"
+staged = "​"
+renamed = "​"
+deleted = "​"
+stashed = "≡"
 
-[hg_branch]
-symbol = " "
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
 
-[java]
-disabled = true
-symbol = " "
-
-[julia]
-symbol = " "
-
-[memory_usage]
-symbol = " "
-
-[nix_shell]
-symbol = " "
-
-[nodejs]
-disabled = true
-symbol = " "
-
-[package]
-disabled = true
-symbol = " "
-
-[php]
-symbol = " "
+[cmd_duration]
+format = "[$duration]($style) "
+style = "yellow"
 
 [python]
-symbol = " "
-
-[ruby]
-symbol = " "
-
-[rust]
-symbol = " "
+format = "[$virtualenv]($style) "
+style = "bright-black"

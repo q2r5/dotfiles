@@ -115,6 +115,15 @@
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
 	untrackedCache = true
 
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[init]
+	defaultBranch = main
+
 [color]
 	# Use colors in Git commands that are capable of colored output when
 	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
@@ -145,14 +154,21 @@
 	# Detect copies as well as renames
 	renames = copies
 	wordRegex = [[:alnum:]_]+|[^[:alnum:]_[:space:]]+
+	algorithm = histogram
+	colorMoved = plain
 
 [diff "bin"]
 	# Use `hexdump` to diff binary files
 	textconv = hexdump -v -C
 
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+
 [help]
 	# Automatically correct and execute mistyped commands
-	autocorrect = 1
+	autocorrect = prompt
 
 [merge]
 	# Include summaries of merged commits in newly created merge commit messages
@@ -173,6 +189,7 @@
 
 [rebase]
 	autoStash = true
+	updateRefs = true
 
 # URL shorthands
 [url "git@github.com:"]
